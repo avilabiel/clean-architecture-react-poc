@@ -1,8 +1,15 @@
-import React from "react";
+import getUsers from "./hooks/get-users";
 import logo from "./logo.svg";
 import "./App.css";
+import { useEffect } from "react";
 
 function App() {
+  const { execute, users } = getUsers();
+
+  useEffect(() => {
+    execute();
+  }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +25,15 @@ function App() {
         >
           Learn React
         </a>
+        <ul>
+          {users.map((user) => {
+            return (
+              <li>
+                {user.id} - {user.name}
+              </li>
+            );
+          })}
+        </ul>
       </header>
     </div>
   );
