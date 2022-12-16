@@ -1,14 +1,14 @@
+import { useEffect } from "react";
 import getUsers from "./hooks/get-users";
 import logo from "./logo.svg";
 import "./App.css";
-import { useEffect } from "react";
 
 function App() {
   const { execute, users } = getUsers();
 
   useEffect(() => {
     execute();
-  }, []);
+  }, [execute]);
 
   return (
     <div className="App">
