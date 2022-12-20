@@ -1,13 +1,26 @@
 import React from "react";
+import useCreateUser from "../../hooks/create-user";
 
 const UserForm: React.FC = () => {
+  const { onChange, user, execute } = useCreateUser();
+
   return (
     <form>
-      Name: <input type="text" name="name" />
+      Name:{" "}
+      <input type="text" name="name" value={user?.name} onChange={onChange} />
       <br />
-      Email: <input type="text" name="email" />
+      Email:{" "}
+      <input type="text" name="email" value={user?.email} onChange={onChange} />
       <br />
-      <button>Create</button>
+      <button
+        type="submit"
+        onClick={(e) => {
+          e.preventDefault();
+          execute();
+        }}
+      >
+        Create
+      </button>
     </form>
   );
 };

@@ -8,7 +8,7 @@ const UsersPage: React.FC = () => {
 
   useEffect(() => {
     execute();
-  }, [execute]);
+  }, []);
 
   return (
     <>
