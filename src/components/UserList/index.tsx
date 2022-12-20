@@ -13,9 +13,9 @@ const UserList: React.FC<Props> = (props: Props) => {
 
   return (
     <ul>
-      {users.map((user) => {
+      {users.map((user, index) => {
         return (
-          <li>
+          <li key={index}>
             {user.id} - {user.name}
           </li>
         );
