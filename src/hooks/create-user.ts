@@ -13,13 +13,13 @@ const useCreateUser = () => {
 
   const [user, setUser] = useState<User>(initialUser);
 
-  const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    if (e.target.value === "error") {
+  const onChange = ({ key, value }: { key: string; value: string }): void => {
+    if (value === "error") {
       throw new Error("User not allowed!");
     }
 
     setUser((user) => {
-      return { ...user, [e.target.name]: e.target.value };
+      return { ...user, [key]: value };
     });
   };
 

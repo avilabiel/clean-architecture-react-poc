@@ -1,4 +1,4 @@
-import React from "react";
+import React, { ReactHTML, ReactHTMLElement } from "react";
 import useCreateUser from "../../hooks/create-user";
 
 const UserForm: React.FC = () => {
@@ -7,10 +7,24 @@ const UserForm: React.FC = () => {
   return (
     <form>
       Name:{" "}
-      <input type="text" name="name" value={user?.name} onChange={onChange} />
+      <input
+        type="text"
+        name="name"
+        value={user?.name}
+        onChange={(e) =>
+          onChange({ key: e.target.name, value: e.target.value })
+        }
+      />
       <br />
       Email:{" "}
-      <input type="text" name="email" value={user?.email} onChange={onChange} />
+      <input
+        type="text"
+        name="email"
+        value={user?.email}
+        onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+          onChange({ key: e.target.name, value: e.target.value })
+        }
+      />
       <br />
       <button
         type="submit"

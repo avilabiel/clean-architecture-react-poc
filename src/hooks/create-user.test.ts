@@ -24,8 +24,12 @@ describe("createUser", () => {
     });
 
     await act(async () => {
+      result.current.onChange({ key: "name", value: "Testevaldo" });
+      result.current.onChange({ key: "email", value: "testevaldo@gmail.com" });
       await result.current.execute();
     });
+
+    const finalUser = result.current.user;
 
     expect(initialUser.id).toBeDefined();
     expect(initialUser.id).toBeNull();
@@ -33,6 +37,11 @@ describe("createUser", () => {
     expect(initialUser.name).toBe("");
     expect(initialUser.email).toBeDefined();
     expect(initialUser.email).toBe("");
+    expect(finalUser.name).toBeDefined();
+    expect(finalUser.name).toBe("Testevaldo");
+    expect(finalUser.email).toBeDefined();
+    expect(finalUser.email).toBe("testevaldo@gmail.com");
+
     expect(mockedAxios.get).toBeCalledTimes(1);
   });
 });
