@@ -1,6 +1,7 @@
 import { renderHook, act } from "@testing-library/react";
 import createUser from "./create-user";
 import goRest from "../externals/axios/go-rest";
+import User from "../types/user";
 
 jest.mock("../externals/axios/go-rest");
 
@@ -23,13 +24,20 @@ describe("createUser", () => {
       data: "User created successfully",
     });
 
-    await act(async () => {
+    let userAfterChanges: User = {} as User;
+
+    await act(() => {
       result.current.onChange({ key: "name", value: "Testevaldo" });
       result.current.onChange({ key: "email", value: "testevaldo@gmail.com" });
+    });
+
+    userAfterChanges = result.current.user as User;
+
+    await act(async () => {
       await result.current.execute();
     });
 
-    const finalUser = result.current.user;
+    const userAfterCreation = result.current.user;
 
     expect(initialUser.id).toBeDefined();
     expect(initialUser.id).toBeNull();
@@ -37,11 +45,19 @@ describe("createUser", () => {
     expect(initialUser.name).toBe("");
     expect(initialUser.email).toBeDefined();
     expect(initialUser.email).toBe("");
-    expect(finalUser.name).toBeDefined();
-    expect(finalUser.name).toBe("Testevaldo");
-    expect(finalUser.email).toBeDefined();
-    expect(finalUser.email).toBe("testevaldo@gmail.com");
 
-    expect(mockedAxios.get).toBeCalledTimes(1);
+    expect(userAfterChanges.name).toBeDefined();
+    expect(userAfterChanges.name).toBe("Testevaldo");
+    expect(userAfterChanges.email).toBeDefined();
+    expect(userAfterChanges.email).toBe("testevaldo@gmail.com");
+
+    expect(userAfterCreation.id).toBeDefined();
+    expect(userAfterCreation.id).toBeNull();
+    expect(userAfterCreation.name).toBeDefined();
+    expect(userAfterCreation.name).toBe("");
+    expect(userAfterCreation.email).toBeDefined();
+    expect(userAfterCreation.email).toBe("");
+
+    expect(mockedAxios.post).toBeCalledTimes(1);
   });
 });

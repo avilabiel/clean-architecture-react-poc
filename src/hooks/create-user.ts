@@ -27,7 +27,7 @@ const useCreateUser = () => {
     const response = await goRest.post("/users", user);
 
     setUser(initialUser);
-    alert("User created successfully");
+    return;
   };
 
   return { user, onChange, execute };
