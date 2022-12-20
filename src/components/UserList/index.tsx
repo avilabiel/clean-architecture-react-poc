@@ -4,7 +4,7 @@ interface Props {
   users: User[];
 }
 
-const ListUsers: React.FC<Props> = (props: Props) => {
+const UserList: React.FC<Props> = (props: Props) => {
   const { users } = props;
 
   if (users.length === 0) {
@@ -24,4 +24,4 @@ const ListUsers: React.FC<Props> = (props: Props) => {
   );
 };
 
-export default ListUsers;
+export default UserList;

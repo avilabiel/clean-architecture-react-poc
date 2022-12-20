@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import ListUsers from "../components/ListUsers";
+import UserList from "../components/UserList";
 import getUsers from "../hooks/get-users";
 
 const UsersPage: React.FC = () => {
@@ -12,7 +12,7 @@ const UsersPage: React.FC = () => {
   return (
     <>
       <h1>Users</h1>
-      <ListUsers users={users} />
+      <UserList users={users} />
     </>
   );
 };
