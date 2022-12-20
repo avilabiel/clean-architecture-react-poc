@@ -26,6 +26,7 @@ const useCreateUser = () => {
   const execute = async (): Promise<void> => {
     const response = await goRest.post("/users", user);
 
+    setUser(initialUser);
     alert("User created successfully");
   };
 
